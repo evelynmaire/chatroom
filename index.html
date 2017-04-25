@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Chatroom</title>
+  <style>
+  body {
+    color: #404040;
+    background: #36D1DC;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #5B86E5, #36D1DC);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #5B86E5, #36D1DC);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    font-size: 16px;
+  }
+
+  * {
+  	box-sizing: border-box;
+  }
+  
+  h1 {
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial, sans-serif;
+    line-height: 1.2;
+    color: #404040;
+  }
+  
+  .form {
+    border: 1px solid #cdcdcd;
+    border-radius: 4px;
+    padding: .75rem;
+    outline: none;
+    vertical-align: middle;
+    margin-bottom: .5rem;
+    width: 100%;
+    line-height: 1;
+  }
+  
+  .button {
+    -webkit-appearance: none;
+    display: inline-block;
+    border: 1px solid #5B86E5;
+    border-radius: 4px;
+    background: #5B86E5;
+    color: #fff;
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    text-transform: none;
+    padding: .75rem 1.25rem;
+    margin: 0 0 .5rem;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    line-height: 1;
+    width: 100%;
+  }
+
+  .button:hover {
+  	background: #36D1DC;
+  	border: 1px solid #36D1DC;
+  }
+  
+  .main {
+    display: block;
+    margin: 0 auto;
+    background: #ffffff;
+    width: 35%;
+    border: 1px solid #dedede;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 4em;
+  }
+  </style>
+</head>
+
+<body>
+  <div class="main">
+    <h1>Chatroom</h1>
+    <ul id="chat"></ul>
+    <input class="form" type="text" id="message">
+    <button class="button">Send</button>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+  <script>
+  var socket, button, message, chat, chatItem
+
+  socket = io()
+  button = document.querySelector('.button')
+  message = document.querySelector('#message')
+  chat = document.querySelector('#chat')
+
+  button.addEventListener('click', function() {
+    socket.emit('chat message', message value)
+  })
+
+  socket.on('chat message', function(msg) {
+    chatItem = document.createElement('li')
+    chatItem.innerHTML = msg
+    chat.appendChild(chatItem)
+  })
+  </script>
+</body>
+
+</html>
