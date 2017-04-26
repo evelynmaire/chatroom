@@ -1,11 +1,11 @@
-<!DOCTYPE html>
 <html lang="en">
-
+<!-- The following CSS is mostly adapted from "Primitive" by Tania Rascia https://taniarascia.github.io/primitive/ -->
 <head>
   <meta charset="UTF-8">
-  <title>Chatroom</title>
+  <title>おしゃべり</title>
   <style>
-  body {
+  body,
+  div {
     color: #404040;
     background: #36D1DC;
     /* fallback for old browsers */
@@ -13,11 +13,12 @@
     /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #5B86E5, #36D1DC);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    font-size: 16px;
+    font-size: 18px;
+    font: normal normal normal 1rem/1.6 -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial, sans-serif;
   }
-
+  
   * {
-  	box-sizing: border-box;
+    box-sizing: border-box;
   }
   
   h1 {
@@ -25,6 +26,8 @@
     font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial, sans-serif;
     line-height: 1.2;
     color: #404040;
+    padding-bottom: 0.2em;
+    /*border-bottom: 1px solid #dedede;*/
   }
   
   .form {
@@ -58,10 +61,14 @@
     line-height: 1;
     width: 100%;
   }
-
+  
   .button:hover {
-  	background: #36D1DC;
-  	border: 1px solid #36D1DC;
+    background: #36D1DC;
+    border: 1px solid #36D1DC;
+  }
+  
+  .button:focus {
+    outline: 0;
   }
   
   .main {
@@ -74,34 +81,46 @@
     border-radius: 4px;
     margin-top: 4em;
   }
+  
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  ul li {
+    padding: 0.5em 0 0.5em 0;
+    border-bottom: 1px solid #dedede;
+  }
+  
+  ul li:first-child {
+    border-top: 1px solid #dedede;
+  }
   </style>
 </head>
 
 <body>
   <div class="main">
     <h1>おしゃべり</h1>
-    <ul id="chat"></ul>
-    <input class="form" type="text" id="message">
-    <button class="button">Send</button>
+    <ul id="messages"></ul>
+    <form action="">
+      <input id="m" autocomplete="off" class="form" type="text" id="message">
+      <button class="button">Send</button>
+    </form>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
   <script>
-  var socket, button, message, chat, chatItem
-
-  socket = io()
-  button = document.querySelector('.button')
-  message = document.querySelector('#message')
-  chat = document.querySelector('#chat')
-
-  button.addEventListener('click', function() {
-    socket.emit('chat message', message value)
-  })
-
-  socket.on('chat message', function(msg) {
-    chatItem = document.createElement('li')
-    chatItem.innerHTML = msg
-    chat.appendChild(chatItem)
-  })
+  $(function() {
+    var socket = io();
+    $('form').submit(function() {
+      socket.emit('chat message', $('#m').val());
+      $('#m').val('');
+      return false;
+    });
+    socket.on('chat message', function(msg) {
+      $('#messages').append($('<li>').text(msg));
+    });
+  });
   </script>
 </body>
 
