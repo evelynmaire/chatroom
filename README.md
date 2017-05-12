@@ -1,4 +1,4 @@
-# chatroom
+# Chatroom
 
 You can find the finished app on heroku [here](https://oshaberi.herokuapp.com/)
 
