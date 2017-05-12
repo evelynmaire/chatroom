@@ -1,6 +1,6 @@
 # chatroom
 
-You can find the finished app on heroku [here](https://oshyaberi.herokuapp.com/)
+You can find the finished app on heroku [here](https://oshaberi.herokuapp.com/)
 
 ## To-do List
 
